@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
             episodeTitle.setText(arrayList.get(random).t)
+
         }
 
     }
