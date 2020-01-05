@@ -1,6 +1,6 @@
-package com.yuyakaido.android.cardstackview.sample
+package com.androar.randogen
 
-data class Spot(
+data class Episode(
         val id: Long = counter++,
         val t: String,
         val p: String,

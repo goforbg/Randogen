@@ -1,5 +1,4 @@
 package com.androar.randogen;
-import com.yuyakaido.android.cardstackview.sample.Spot;
 
 import java.util.List;
 import retrofit2.Call;
@@ -13,5 +12,5 @@ public interface Api {
     String BASE_URL = "http://goforbg.com/";
 
     @GET("/friendss1.json")
-    Call<List<Spot>> getEpisodes();
+    Call<List<Episode>> getEpisodes();
 }
