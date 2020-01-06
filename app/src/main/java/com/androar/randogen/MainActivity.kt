@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val arrayList = generateEpisodes()
-        val randomButton = findViewById(R.id.ic_randomize) as FloatingActionButton
+        val randomButton = findViewById(R.id.randombutton) as TextView
         val episodeImage = findViewById<ImageView>(R.id.episodeImage)
         val episodeTitle = findViewById<TextView>(R.id.episodeTitle)
 
