@@ -22,40 +22,58 @@
             android:layout_height="match_parent"
             android:clipChildren="false">
 
+            <TextView
+
+                android:id="@+id/tvRandomQuote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="Could you be watching any more episodes?!"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="-20dp"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="120dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="120dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="10dp">
 
 
                 <ImageView
                     android:id="@+id/episodeImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/s1e1"/>
+                    android:cropToPadding="false"
+                    android:scaleType="center"
+                    android:src="@drawable/s1e1" />
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/gradation_black"/>
+                    android:src="@drawable/gradation_black" />
 
                 <TextView
                     android:id="@+id/episodeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="The One Where Monica Gets a Roommate"
-                    android:textSize="30sp"
+                    android:layout_gravity="bottom"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Season 1, Episode 1: The One Where Monica Gets a Roommate"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
-                    android:layout_gravity="bottom"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_marginBottom="20dp"/>
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
 
             </androidx.cardview.widget.CardView>
@@ -84,13 +102,6 @@
 
         </androidx.cardview.widget.CardView>
 
-
-
-<!--        <com.airbnb.lottie.LottieAnimationView-->
-<!--            app:lottie_autoPlay="true"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            app:lottie_fileName="12748-loading-dots.json"/>-->
 
 
     </LinearLayout>
