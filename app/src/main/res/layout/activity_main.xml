@@ -35,9 +35,7 @@
                     android:id="@+id/episodeImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/s1e1"
-                    android:cropToPadding="false"
-                    android:scaleType="center" />
+                    android:src="@drawable/s1e1"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -86,6 +84,13 @@
 
         </androidx.cardview.widget.CardView>
 
+
+
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:lottie_fileName="12748-loading-dots.json"/>-->
 
 
     </LinearLayout>
