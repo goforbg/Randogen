@@ -8,6 +8,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/black">
+        <ImageView
+            android:src="@drawable/friends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </Toolbar>
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
