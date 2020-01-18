@@ -23,15 +23,16 @@
             android:clipChildren="false">
 
             <TextView
-
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/tvRandomQuote"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-light"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
                 android:text="Could you be watching any more episodes?!"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -56,9 +57,34 @@
                     android:src="@drawable/s1e1" />
 
                 <ImageView
+                    android:id="@+id/gradientImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/gradation_black" />
+
+                <TextView
+                    android:layout_marginTop="-60dp"
+                    android:id="@+id/firstRunText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oh baby, you are in for a binge!"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="italic"
+                    android:textSize="40sp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-medium" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/firstRunLottie"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="firstRunLottie.json"
+                    app:lottie_loop="true"
+                    app:lottie_speed="1.25"/>
 
                 <TextView
                     android:id="@+id/episodeTitle"
