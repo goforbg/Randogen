@@ -17,6 +17,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     "This is all a moo point.",
     "How you doin'?",
     "You don’t even have a 'pla'",
-    "They don’t know that we know they know we know.")
+    "They don’t know that we know they know.")
 
 
 
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         arrayList = generateEpisodes()
 
         randomButton.setOnClickListener {
-            doRandom()
+            doRandom(9)
         }
 
         prefs = getSharedPreferences("com.androar.randogen", MODE_PRIVATE);
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 episodeTitle.visibility = View.VISIBLE
                 firstRunText.visibility = View.INVISIBLE
                 firstRunLottie.visibility = View.INVISIBLE
-                doRandom()
+                doRandom(9)
             }
             prefs!!.edit().putBoolean("firstrun", false).apply()
         }
@@ -113,22 +114,30 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun doRandom() {
-        val randomNumber = ArrayList<Int>()
-        for (i in 1..8) randomNumber.add(i)
-        Collections.shuffle(randomNumber)
+    fun doRandom(max: Int) {
 
-        randomQuote.setText(appTitles[randomNumber[0]])
+        var rnds = (0..max).random()
+        val randomArray : ArrayList<Int> = arrayListOf()
+        if (randomArray.size != max-1) {
+            if (randomArray.contains(rnds)) {
+                rnds = (0 .. max).random()
+            }
+            else {
+                randomArray.add(rnds)
+            }
+        }
+
+        randomQuote.setText(appTitles[randomArray[0]])
 
         Glide.with(this)
-                .load(arrayList.get(randomNumber[0]).i)
+                .load(arrayList.get(randomArray[0]).i)
                 .into(episodeImage)
 
         episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
-        episodeTitle.setText(arrayList.get(randomNumber[0]).t)
+        episodeTitle.setText(arrayList.get(randomArray[0]).t)
 
         episodeImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomNumber[0]).t))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
             startActivity(intent)
         }
     }
