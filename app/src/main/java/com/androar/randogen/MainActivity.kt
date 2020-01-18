@@ -22,6 +22,24 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     var prefs: SharedPreferences? = null
+    lateinit var  randomQuote : TextView
+    lateinit var randomButton : TextView
+    lateinit var episodeImage : ImageView
+    lateinit var gradientImage : ImageView
+    lateinit var episodeTitle : TextView
+    lateinit var firstRunText : TextView
+    lateinit var arrayList :List<Episode>
+    var appTitles = arrayOf("Could you be watching any more episodes?!",
+    "We're not good at advice, we have more episodes.",
+    "Are they on a break?",
+    "See? we're lobsters.",
+    "Joey doesn't share food, do you?",
+    "SEVEN!",
+    "This is all a moo point.",
+    "How you doin'?",
+    "You don’t even have a 'pla'",
+    "They don’t know that we know they know we know.")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,42 +49,18 @@ class MainActivity : AppCompatActivity() {
         //FullScreen
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
+        randomQuote = findViewById<TextView>(R.id.tvRandomQuote)
+        randomButton = findViewById<TextView>(R.id.randombutton)
+        episodeImage = findViewById<ImageView>(R.id.episodeImage)
+        gradientImage = findViewById<ImageView>(R.id.gradientImage)
+        episodeTitle = findViewById<TextView>(R.id.episodeTitle)
+        firstRunText = findViewById<TextView>(R.id.firstRunText)
+
         //Arrays
-        val arrayList = generateEpisodes()
-        val randomQuote = findViewById<TextView>(R.id.tvRandomQuote)
-        val randomButton = findViewById<TextView>(R.id.randombutton)
-        val episodeImage = findViewById<ImageView>(R.id.episodeImage)
-        val gradientImage = findViewById<ImageView>(R.id.gradientImage)
-        val episodeTitle = findViewById<TextView>(R.id.episodeTitle)
-        val firstRunText = findViewById<TextView>(R.id.firstRunText)
-        val appTitles = arrayOf("Could you be watching any more episodes?!",
-                "We're not good at advice, we have more episodes.",
-                "Are they on a break?",
-                "See? we're lobsters.",
-                "Joey doesn't share food, do you?",
-                "SEVEN!",
-                "This is all a moo point.",
-                "How you doin'?",
-                "You don’t even have a 'pla'",
-                "They don’t know that we know they know we know.")
+        arrayList = generateEpisodes()
 
         randomButton.setOnClickListener {
-            val r = Random()
-            var random = r.nextInt(10 - 1) + 1;
-
-            randomQuote.setText(appTitles[r.nextInt(9 - 1) + 1])
-
-            Glide.with(this)
-                    .load(arrayList.get(random).i)
-                    .into(episodeImage)
-
-            episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
-            episodeTitle.setText(arrayList.get(random).t)
-
-            episodeImage.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(random).t))
-                startActivity(intent)
-            }
+            doRandom()
         }
 
         prefs = getSharedPreferences("com.androar.randogen", MODE_PRIVATE);
@@ -75,6 +69,14 @@ class MainActivity : AppCompatActivity() {
             gradientImage.setImageResource(R.drawable.gradation_pink)
             randomButton.text = "Tap me! ;)"
             episodeTitle.visibility = View.INVISIBLE
+            randomButton.setOnClickListener {
+                randomButton.setText("Choose Next Random Episode")
+                gradientImage.setImageResource(R.drawable.gradation_black)
+                episodeTitle.visibility = View.VISIBLE
+                firstRunText.visibility = View.INVISIBLE
+                firstRunLottie.visibility = View.INVISIBLE
+                doRandom()
+            }
             prefs!!.edit().putBoolean("firstrun", false).apply()
         }
 
@@ -108,6 +110,27 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return arrayList;
+    }
+
+
+    fun doRandom() {
+        val randomNumber = ArrayList<Int>()
+        for (i in 1..8) randomNumber.add(i)
+        Collections.shuffle(randomNumber)
+
+        randomQuote.setText(appTitles[randomNumber[0]])
+
+        Glide.with(this)
+                .load(arrayList.get(randomNumber[0]).i)
+                .into(episodeImage)
+
+        episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
+        episodeTitle.setText(arrayList.get(randomNumber[0]).t)
+
+        episodeImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomNumber[0]).t))
+            startActivity(intent)
+        }
     }
 
 }
