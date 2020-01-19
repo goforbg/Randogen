@@ -3,7 +3,7 @@ package com.androar.randogen
 data class Episode(
         val id: Long = counter++,
         val t: String,
-        val p: String,
+        val d: String,
         val i: String
 )
 

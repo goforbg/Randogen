@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         arrayList = generateEpisodes()
 
         randomButton.setOnClickListener {
-            doRandom(9)
+            doRandom(232)
         }
 
         prefs = getSharedPreferences("com.androar.randogen", MODE_PRIVATE);
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 episodeTitle.visibility = View.VISIBLE
                 firstRunText.visibility = View.INVISIBLE
                 firstRunLottie.visibility = View.INVISIBLE
-                doRandom(9)
+                doRandom(234)
             }
             prefs!!.edit().putBoolean("firstrun", false).apply()
         }
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Episode>>, response: Response<List<Episode>>) {
                 val episodeList = response.body()!!
                 for (i in episodeList.indices) {
-                    arrayList.add(Episode(i.toLong(), episodeList[i].t, episodeList[i].p, episodeList[i].i))
+                    arrayList.add(Episode(i.toLong(), episodeList[i].t, episodeList[i].d, episodeList[i].i))
                 }
             }
 
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        randomQuote.setText(appTitles[randomArray[0]])
+        randomQuote.setText(appTitles[2])
 
         Glide.with(this)
                 .load(arrayList.get(randomArray[0]).i)

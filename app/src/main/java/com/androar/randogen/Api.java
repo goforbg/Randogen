@@ -11,6 +11,6 @@ import retrofit2.http.GET;
 public interface Api {
     String BASE_URL = "http://goforbg.com/";
 
-    @GET("/friendss1.json")
+    @GET("/friends.json")
     Call<List<Episode>> getEpisodes();
 }
