@@ -127,18 +127,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        randomQuote.setText(appTitles[2])
+        val r = Random()
+        randomQuote.setText(appTitles[r.nextInt(9 - 1)+ 1])
 
-        Glide.with(this)
-                .load(arrayList.get(randomArray[0]).i)
-                .into(episodeImage)
 
-        episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
-        episodeTitle.setText(arrayList.get(randomArray[0]).t)
+        try {
+            Glide.with(this).asGif()
+                    .load(arrayList.get(randomArray[0]).i)
+                    .into(episodeImage)
 
-        episodeImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
-            startActivity(intent)
+            episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
+            episodeTitle.setText(arrayList.get(randomArray[0]).t)
+
+            episodeImage.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
+                startActivity(intent)
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Damn it Chandler!",Toast.LENGTH_LONG).show()
         }
     }
 
