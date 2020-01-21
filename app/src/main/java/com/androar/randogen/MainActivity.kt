@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -132,9 +133,15 @@ class MainActivity : AppCompatActivity() {
 
 
         try {
-            Glide.with(this).asGif()
-                    .load(arrayList.get(randomArray[0]).i)
+
+            var random = r.nextInt(56-0)+0
+            Glide.with(this)
+                    .load("http://www.goforbg.com/friends/pic_0"+random+".jpg")
+                    .thumbnail(Glide.with(this).load(R.drawable.red_loading))
                     .into(episodeImage)
+
+
+            Log.d("load","http://www.goforbg.com/friends/pic_0"+random+".jpg")
 
             episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
             episodeTitle.setText(arrayList.get(randomArray[0]).t)
