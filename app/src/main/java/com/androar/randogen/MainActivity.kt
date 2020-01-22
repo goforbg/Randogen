@@ -41,6 +41,16 @@ class MainActivity : AppCompatActivity() {
     "How you doin'?",
     "You don’t even have a 'pla'",
     "They don’t know that we know they know.")
+    var errorMessages = arrayOf("Damn it chandler!",
+            "Joey spilt sauce on our servers!",
+            "fat Monica sat on our servers!",
+            "Could your internet be any slower?!",
+            "Ross divorced our servers",
+            "Rachel spent our server money on lipstick",
+            "Phoebe sings smelly internet",
+            "Your internet is moo point.",
+            "Our servers are ON A BREAK",
+            "Could our servers be any more busy?!")
 
 
 
@@ -134,10 +144,10 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-            var random = r.nextInt(56-0)+0
+            val random = r.nextInt(56-0)+0
             Glide.with(this)
                     .load("http://www.goforbg.com/friends/pic_0"+random+".jpg")
-                    .thumbnail(Glide.with(this).load(R.drawable.red_loading))
+                    .placeholder(R.drawable.red_loading)
                     .into(episodeImage)
 
 
@@ -147,11 +157,25 @@ class MainActivity : AppCompatActivity() {
             episodeTitle.setText(arrayList.get(randomArray[0]).t)
 
             episodeImage.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
-                startActivity(intent)
+                val netFlixId = "70274021"
+                val watchUrl = "http://www.netflix.com/watch/70274021"
+
+
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setClassName("com.netflix.mediaclient", "com.netflix.mediaclient.ui.launch.UIWebViewActivity")
+                    intent.setData(Uri.parse(watchUrl));
+                    startActivity(intent)
+                } catch (e: java.lang.Exception) {
+                    Toast.makeText(this, "Come on, let's install netflix and chill.", Toast.LENGTH_LONG).show()
+                }
+
+
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
+//                startActivity(intent)
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Damn it Chandler!",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, errorMessages[r.nextInt(10 - 1)+ 1],Toast.LENGTH_LONG).show()
         }
     }
 
