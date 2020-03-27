@@ -53,8 +53,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:cropToPadding="false"
-                    android:scaleType="center"
-                    android:src="@drawable/s1e1" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/pic_021" />
 
                 <ImageView
                     android:id="@+id/gradientImage"
@@ -63,18 +63,19 @@
                     android:src="@drawable/gradation_black" />
 
                 <TextView
-                    android:layout_marginTop="-60dp"
                     android:id="@+id/firstRunText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Oh baby, you are in for a binge!"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="italic"
-                    android:textSize="40sp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-60dp"
+                    android:fontFamily="sans-serif-medium"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="sans-serif-medium" />
+                    android:text="Oh baby, you are in for a binge!"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="40sp"
+                    android:textStyle="italic" />
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/firstRunLottie"
@@ -95,7 +96,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Season 1, Episode 1: The One Where Monica Gets a Roommate"
+                    android:text="Click the button to binge on an amazing episode!"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="30sp"
