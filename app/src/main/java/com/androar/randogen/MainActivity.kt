@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
             episodeTitle.visibility = View.VISIBLE
         }
 
+        doRandom(232)
 
     }
 
@@ -157,8 +158,10 @@ class MainActivity : AppCompatActivity() {
             episodeTitle.setText(arrayList.get(randomArray[0]).t)
 
             episodeImage.setOnClickListener {
-                val netFlixId = "70274021"
-                val watchUrl = "http://www.netflix.com/watch/70274021"
+                val netFlixId = 70274021 + randomArray[0] - 25
+                val watchUrl = "http://www.netflix.com/watch/"+netFlixId
+                Log.i("url", watchUrl.toString())
+                Log.i("rand", randomArray[0].toString())
 
 
                 try {
@@ -167,9 +170,8 @@ class MainActivity : AppCompatActivity() {
                     intent.setData(Uri.parse(watchUrl));
                     startActivity(intent)
                 } catch (e: java.lang.Exception) {
-                    Toast.makeText(this, "Come on, let's install netflix and chill.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Come on,let's install netflix and chill.", Toast.LENGTH_LONG).show()
                 }
-
 
 //                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
 //                startActivity(intent)
