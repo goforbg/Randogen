@@ -1,22 +1,22 @@
 package com.androar.randogen
 
-import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var episodeTitle : TextView
     lateinit var firstRunText : TextView
     lateinit var arrayList :List<Episode>
+    var jsonString: String = ""
     var appTitles = arrayOf("Could you be watching any more episodes?!",
     "We're not good at advice, we have more episodes.",
     "Are they on a break?",
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 episodeTitle.visibility = View.VISIBLE
                 firstRunText.visibility = View.INVISIBLE
                 firstRunLottie.visibility = View.INVISIBLE
-                doRandom(234)
+                doRandom(232)
             }
             prefs!!.edit().putBoolean("firstrun", false).apply()
         }
@@ -98,9 +99,11 @@ class MainActivity : AppCompatActivity() {
             episodeTitle.visibility = View.VISIBLE
         }
 
-        doRandom(232)
 
     }
+
+
+
 
     private fun generateEpisodes(): List<Episode> {
         val arrayList = ArrayList<Episode>()
@@ -144,37 +147,36 @@ class MainActivity : AppCompatActivity() {
 
 
         try {
-
-            val random = r.nextInt(56-0)+0
-            Glide.with(this)
-                    .load("http://www.goforbg.com/friends/pic_0"+random+".jpg")
-                    .placeholder(R.drawable.red_loading)
-                    .into(episodeImage)
-
-
-            Log.d("load","http://www.goforbg.com/friends/pic_0"+random+".jpg")
-
-            episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
+            Log.i("errors", arrayList.get(randomArray[0]).t)
             episodeTitle.setText(arrayList.get(randomArray[0]).t)
 
+            val x = Random().nextInt(4);
+            var resource = R.drawable.pic_014
+            when (x) {
+                0 ->
+                    resource = R.drawable.pic_042
+                1 ->
+                    resource = R.drawable.pic_014
+                2 ->
+                    resource = R.drawable.pic_021
+                3 ->
+                    resource = R.drawable.pic_023
+            }
+            episodeImage.setImageResource(resource)
+            episodeImage.scaleType = ImageView.ScaleType.CENTER_CROP
+
             episodeImage.setOnClickListener {
-                val netFlixId = 70274021 + randomArray[0] - 25
-                val watchUrl = "http://www.netflix.com/watch/"+netFlixId
-                Log.i("url", watchUrl.toString())
-                Log.i("rand", randomArray[0].toString())
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Plot")
+                //set message for alert dialog
+                builder.setMessage(arrayList.get(randomArray[0]).d)
 
-
-                try {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.setClassName("com.netflix.mediaclient", "com.netflix.mediaclient.ui.launch.UIWebViewActivity")
-                    intent.setData(Uri.parse(watchUrl));
-                    startActivity(intent)
-                } catch (e: java.lang.Exception) {
-                    Toast.makeText(this, "Come on,let's install netflix and chill.", Toast.LENGTH_LONG).show()
+                builder.setNegativeButton("Aight"){dialogInterface, which ->
+                   dialogInterface.dismiss()
                 }
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.show()
 
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + arrayList.get(randomArray[0]).t))
-//                startActivity(intent)
             }
         } catch (e: Exception) {
             Toast.makeText(this, errorMessages[r.nextInt(10 - 1)+ 1],Toast.LENGTH_LONG).show()
